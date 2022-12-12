@@ -52,7 +52,7 @@
                         <div class="col-lg-5">
                             <p>
                                 <b><a href="/shop/{{ $item->attributes->slug }}">{{ $item->name }}</a></b><br>
-                                <b>Price: </b>{{ $item->price }}€<br>
+                                <b>Precio: </b>{{ $item->price }}€<br>
                                 <b>Sub Total: </b>{{ \Cart::get($item->id)->getPriceSum() }}€<br>
                                 {{--                                <b>With Discount: </b>{{ \Cart::get($item->id)->getPriceSumWithConditions() }}--}}
                             </p>
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <form action="{{ route('cart.update') }}" method="POST">
                                     {{ csrf_field() }}
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
                                         <input type="hidden" value="{{ $item->id}}" id="id" name="id">
                                         <input type="number" class="form-control form-control-sm" value="{{ $item->quantity }}"
                                                id="quantity" name="quantity" style="width: 70px; margin-right: 10px;">
@@ -89,11 +89,18 @@
                 <div class="col-lg-5">
                     <div class="card">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><b>Total: </b>{{ \Cart::getTotal() }}€</li>
+                            <li class="list-group-item" name="total"><b>Total: </b>{{ \Cart::getTotal() }}€</li>
                         </ul>
                     </div>
-                    <br><a href="/bicis" class="btn btn-dark">Continue en la tienda</a>
-                    <a href="/" class="btn btn-success">Proceder al pago</a>
+                    <br>
+                    <div style="display:flex;">
+                    <a href="/bicis" class="btn btn-dark" style="margin:10px;">Continue en la tienda</a>
+                    <form action="{{ route('payment') }}" method="post" style="margin:10px;">
+                    @csrf
+                        <input type="hidden" name="amount" value="{{ \Cart::getTotal() }}">
+                    <button class="btn btn-success" type="submit">Proceder al pago</button>
+                    </form>
+                    </div>  
                 </div>
             @endif
         </div>

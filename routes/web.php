@@ -6,6 +6,7 @@ use App\Http\Controllers\AlojamientosController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PistasController;
+use App\Http\Controllers\EnvioController;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,6 @@ Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
-//Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
-//Route::get('/paypal/status', 'PaymentController@payPalStatus');
 Route::get('/pistas', function () {
     return view('laciana.pistas');
 });
@@ -55,3 +54,33 @@ Route::get('/interes', function () {
 });
 
 Route::resource('alojamientos', AlojamientosController::class);
+
+Route::post('pay', [PaymentController::class, 'pay'])->name('payment');
+Route::get('success', [PaymentController::class, 'success']);
+Route::get('error', [PaymentController::class, 'error']);
+
+//Route::get('envio',[EnviosController::class, 'index'])->name('envio.index');
+//Route::post('envio',[EnviosController::class, 'create'])->name('envio.create');
+//Route::get('datos',[EnviosController::class, 'datos'])->name('envio.datos');
+
+Route::get('envio',[EnvioController::class, 'index'])->name('envio.index');
+Route::post('envio',[EnvioController::class, 'create'])->name('envio.create');
+Route::get('datos',[EnvioController::class, 'datos'])->name('envio.datos');
+
+
+Route::get('/gracias', function () {
+    return view('envio.gracias');
+});
+
+Route::get('/legal', function () {
+    return view('nosotros.legal');
+});
+
+Route::get('/nosotros', function () {
+    return view('nosotros.nosotros');
+});
+
+Route::get('/error', function () {
+    return view('error.index');
+});
+

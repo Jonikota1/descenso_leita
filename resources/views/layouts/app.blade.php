@@ -68,7 +68,7 @@
 
                     <div style="width:200px;">
                         <ul class="menu">
-                        <li class="dropdown-li"><a href="#" class="text-lg font-semibold text-gray-100 no-underline">{{ __("Laciana")}}</a>
+                        <li class="dropdown-li"><a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">{{ __("Laciana")}}</a>
 
                             <ul class="dropdown">
                                 <li><a href="{{ url('/pistas') }}">Nuestras Pistas</a></li>

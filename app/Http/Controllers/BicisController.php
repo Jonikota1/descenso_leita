@@ -48,14 +48,12 @@ class BicisController extends Controller
         $this->validate($request, [
             "nombre" => "required|max:240",
             "descripcion" => "nullable|string|min:5",
-            "stock" => "required|max:20",
             "precio" => "required|max:10",
             "imagen"=> "required|max:50",
         ]);
         Bicis::create($request->only( 
         "nombre",
         "descripcion",
-        "stock",
         "precio",
         "imagen"));
         return redirect(route("bicis.index"))
@@ -103,7 +101,6 @@ class BicisController extends Controller
  
         $bicis->nombre = $request->get('nombre');
         $bicis->descripcion = $request->get('descripcion');
-        $bicis->stock = $request->get('stock');
         $bicis->precio = $request->get('precio');
         $bicis->imagen = $request->get('imagen');
  

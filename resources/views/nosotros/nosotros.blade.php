@@ -2,7 +2,47 @@
 @section("content")
 
 <style>
-.site-footer
+
+.nosotros{
+    width:60%;
+    margin:auto;
+}
+
+.nosotros h1,h2{
+    color:darkgreen;
+}
+
+.nosotros p, h1, h2{
+    font-family: Times New Roman;
+}
+
+.nosotros h2{
+    margin-top:30px;
+}
+
+.nosotros p{
+    font-size:20px;
+}
+
+.localizacion{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 30px;
+}
+
+.direccion{
+    margin: auto;
+    font-size: 24px;
+}
+
+.video_descenso iframe{
+    margin: auto;
+    margin-bottom: 30px;
+    margin-top:30px;
+}
+
+
+        .site-footer
 {
   background-color:#26272b;
   padding:45px 0 20px;
@@ -167,55 +207,30 @@
 }
 </style>
 
-<div class="container" style="margin-top: 80px">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Alojamientos</li>
-            </ol>
-        </nav>
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <h4>Alojamientos</h4>
-                        <p style="font-family:Times New Roman; font-size:17px;">Te presentamos los lugares de alojamiento cercanos a las pistas con los cuales nosotros tenemos relación.
-                          <br>Actualmente disponemos de tres, pero en un futuro esperamos poder expandirlo. Te ofrecemos tres tipos de alojamientos, uno que es habitual como un hotal, otro que es más barato como un aparthotel y otro por si quieres una inclusión más activa como son apartamentos</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    @foreach($alojamientos as $pro)
-                        <div class="col-lg-3">
-                            <div class="card" style="margin-bottom: 20px; height: auto;">
-                                <img src="{{url('/images/'.$pro->imagen)}}"
-                                     class="card-img-top mx-auto"
-                                     style="height: 150px; width: 150px;display: block;"
-                                     alt="{{ $pro->imagen }}"
-                                >
-                                <div class="card-body">
-                                    <a href="{{route('alojamientos.show', $pro) }}"  class="d-block display-10 mb-4 h-100 no-underline" style="color:darkgreen;"><h6 class="card-title">{{ $pro->nombre }}</h6></a>
-                                    <p>Desde: {{ $pro->precio }}€</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+<div class="nosotros">
+    <h1>Sobre nosotros</h1>
+    <p>Descenso Leita tiene como objetivo expandir el turismo en el Valle de Laciana a través de la modalidad de Descenso. Para realizar este objetivo hemos realizado una tienda de Descenso aprovechando las pistas creadas para el esquí o el snow en los meses principalmente de verano.</p>
+    <p>Debido al cierre de las minas en España y que las principales actividades económicas de este valle eran mineras la economía de este lugar no está en su auge por lo que debemos encontrar otras maneras de incentivar esta economía, ya sea el turismo, el esquí o en este caso el descenso.</p>
+
+
+    <h2>Localización</h2>
+    <div class="localizacion">
+        <div class="direccion">
+            <p><b>Calle:</b> Solana Pi-vi</p>
+            <p><b>Número:</b> 3</p> 
+            <p><b>Código Postal:</b> 24112</p>
+            <p><b>Localidad:</b> Villablino, León</p>
+        </div>
+        <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1339.1094849909373!2d-6.347639220802121!3d42.94417409493904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd372bbeef45b627%3A0x7fe607fe00fbd983!2sC.%20Solana%20Pi-vi%2C%203%2C%2024112%20Villablino%2C%20Le%C3%B3n!5e0!3m2!1ses!2ses!4v1670251818947!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 
-  @auth
-  @if(auth()->user()->roles()->find(1))<!--Solo puede acceder siendo administrador-->
-<div class="flex justify-center flex-wrap p-4 mt-5 text-white" style="background-color: #bdd2b6;">
-<div class="text-center">
-  <h1 class="mb-5">{{ __("Añade un objeto") }}</h1>
-<a href="{{route('alojamientos.create')}}" class="bg-transparent hover:bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
-{{ __("Añadir objeto")}}<!--Me lleva a bicis/create-->
-@endif
-  @endauth
-</a>
-</div>
+    <div class="video_descenso">
+        <h2>Descenso, ¿qué es?</h2>
+    <p>Para entender que es el descenso aquí les dejo un vídeo:</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VSZ483lffxQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </div>
 
 <div class="footer">
@@ -240,7 +255,7 @@
           <div class="col-xs-6 col-md-3">
             <h6>Acceso rápidos</h6>
             <ul class="footer-links">
-              <li><a href="/nosotros">Sobre nosotros</a></li>
+              <li><a href="/">Sobre nosotros</a></li>
               <li><a href="{{ route('contactanos.index') }}">Contáctanos</a></li>
               <li><a href="{{ route('bicis.index') }}">Catálogo</a></li>
               <li><a href="/legal">Política de privacidad</a></li>

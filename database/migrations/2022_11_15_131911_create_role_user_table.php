@@ -13,7 +13,7 @@ class CreateRoleUserTable extends Migration
     {
         Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');//CREO I ASIGNO LAS CLAVES PRIMARIAS Y FOREIGNS  DE LA TABLA PIVOTE role-user A lLAS TABLAS users Y roles
+            $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');//CREO Y ASIGNO LAS CLAVES PRIMARIAS Y FOREIGNS  DE LA TABLA PIVOTE role-user A lLAS TABLAS users Y roles
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');                  
             $table->timestamps();
         });

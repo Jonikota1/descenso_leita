@@ -9,6 +9,6 @@ class Alojamientos extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','nombre','descripcion', 'precio', 'imagen'
+        'id','nombre','descripcion', 'precio', 'enlace', 'imagen'
     ];
 }

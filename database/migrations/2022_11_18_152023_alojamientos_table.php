@@ -18,6 +18,7 @@ class AlojamientosTable extends Migration
             $table->string('nombre')->unique();
             $table->text('descripcion');
             $table->double('precio');
+            $table->string('enlace');
             $table->string('imagen');
             $table->timestamps();
         });

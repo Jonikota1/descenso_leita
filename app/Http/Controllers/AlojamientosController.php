@@ -44,12 +44,14 @@ class AlojamientosController extends Controller
             "nombre" => "required|max:240",
             "descripcion" => "nullable|string|min:5",
             "precio" => "required|max:10",
+            "enlace" => "required|min:5",
             "imagen"=> "required|max:50",
         ]);
         Alojamientos::create($request->only( 
         "nombre",
         "descripcion",
         "precio",
+        "enlace",
         "imagen"));
         return redirect(route("alojamientos.index"))
             ->with("success", __("Hemos añadido el objeto."));
@@ -63,7 +65,7 @@ class AlojamientosController extends Controller
      */
     public function show($id)
     {
-        $bicis = Bicis::find($id);
+        $alojamientos = Alojamientos::find($id);
         return view('alojamientos.show', ['alojamientos'=>$alojamientos]);
     }
 
@@ -73,13 +75,13 @@ class AlojamientosController extends Controller
      * @param  \App\Models\Alojamientos  $alojamientos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alojamientos $alojamientos)
+    public function edit(Alojamientos $alojamiento)
     {
         $update = true;
         $title = __("Editar alojamiento");
         $textButton = __("Actualizar");
         $alojamiento = Alojamientos::find($alojamiento->id);
-        $route = route("alojamientos.update", ["bici" => $bici]);
+        $route = route("alojamientos.update", ["alojamiento" => $alojamiento]);
         return view("alojamientos.edit",compact("update", "title", "textButton", "route", "alojamiento"))->with('alojamiento',$alojamiento);
     }
 
@@ -90,13 +92,14 @@ class AlojamientosController extends Controller
      * @param  \App\Models\Alojamientos  $alojamientos
      * @return \Illuminate\Http\Response
      */
-    public function update(Alojamientos $alojamiento)
+    public function update(Request $request, Alojamientos $alojamiento)
     {
         $alojamientos = Alojamientos::find($alojamiento->id);
  
         $alojamientos->nombre = $request->get('nombre');
         $alojamientos->descripcion = $request->get('descripcion');
         $alojamientos->precio = $request->get('precio');
+        $alojamientos->enlace = $request->get('enlace');
         $alojamientos->imagen = $request->get('imagen');
  
         $alojamientos->save();
